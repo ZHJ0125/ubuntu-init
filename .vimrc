@@ -6,7 +6,6 @@ set cursorline       " 光标所在行高亮
 set showcmd          " 在底部显示键入的指令
 set wildmenu         " 命令模式用 Tab 自动补全
 set hlsearch         " 高亮搜索匹配结果
-exec "nohlsearch"    " 去掉高亮（感觉有点玄学）
 set incsearch        " 边输入边高亮
 set ignorecase       " 忽略大小写
 set smartcase        " 只能大小写（其实就是只对第一个字母大写的搜索词大小写敏感）
