@@ -2,10 +2,10 @@
 
 #git_name="ZHJ0125"
 #git_email="shandonghoujin@163.com"
-user="zhj"
-SoftDir="/home/$user/Downloads/Software"
+#user="zhj"
+SoftDir="/home/$USER/Downloads/Software"
 
-# 1. 脚本需要sudo来执行，所以需要判断是否具有root权限：
+# 1. root
 function rootness {
     echo -e "\nStart to detect script permissions ..."
     if [[ $EUID -ne 0 ]]
@@ -16,50 +16,51 @@ function rootness {
     echo -e "Permissions : OK\n"
 }
 
-# 2. mkdir
+# 2. apt-get
+function apt_conf {
+    echo -e "\nStart to update software source ..."
+    sudo apt-get clean
+    sudo apt-get -y update
+    sudo apt-get -y upgrade
+    echo -e "System update : OK\n"
+}
+
+# 3. mkdir
 function mkdir_conf {
     echo -e "\nStart to build Software package directory ..."
     if [ ! -d "$SoftDir" ];then
         mkdir -p $SoftDir
-        chown -R $user $SoftDir
-        chgrp -R $user $SoftDir
+        # chown -R $user $SoftDir  -> for ROOT
+        # chgrp -R $user $SoftDir  -> for ROOT
     fi
     echo "$SoftDir had been build."
     echo -e "Directory build : OK\n"
 }
 
-# 3. apt-get
-function apt_conf {
-    echo -e "\nStart to update software source ..."
-    apt-get clean
-    apt-get -y update
-    apt-get -y upgrade
-    echo -e "System update : OK\n"
-}
-
 # 4. wget
 function wget_install {
     echo -e "\nStart to install wget and curl ..."
-    apt-get -y install wget
-    apt-get -y install curl
+    sudo apt-get -y install wget
+    sudo apt-get -y install curl
     echo -e "wget & curl : OK\n"
 }
 
 # 5. source_list
 function source_list {
     echo -e "\nStart to change software source ..."
-    cp /etc/apt/sources.list /etc/apt/sources.list_backup
-    wget -O /etc/apt/sources.list https://gitee.com/zhj0125/ubuntu-init/raw/master/sources.list
-    apt-get -y update
+    sudo cp /etc/apt/sources.list /etc/apt/sources.list_backup
+    sudo wget -O /etc/apt/sources.list https://gitee.com/zhj0125/ubuntu-init/raw/master/.sources_list
+    sudo apt-get -y update
+    sudo apt-get -y autoremove
     echo -e "Software source : OK\n"
 }
 
 # 6. Git
 function git_install {
     echo -e "\nStart to install git ..."
-    apt-get -y install git
+    sudo apt-get -y install git
     # Download .gitconfig to user home
-    wget -O /home/$user/.gitconfig https://gitee.com/zhj0125/ubuntu-init/raw/master/.gitconfig
+    sudo wget -O /home/$USER/.gitconfig https://gitee.com/zhj0125/ubuntu-init/raw/master/.gitconfig
     # echo "\[user\]" >> ~/.gitconfig
     # echo "name = $git_name" >> ~/.gitconfig
     # echo "email = $git_email" >> ~/.gitconfig
@@ -69,8 +70,8 @@ function git_install {
 # 7. VIM
 function vim_install {
     echo -e "\nStart to install vim ..."
-    apt-get -y install vim
-    wget -O /home/$user/.vimrc https://gitee.com/zhj0125/ubuntu-init/raw/master/.vimrc
+    sudo apt-get -y install vim
+    sudo wget -O /home/$USER/.vimrc https://gitee.com/zhj0125/ubuntu-init/raw/master/.vimrc
     echo -e "VIM install : OK\n"
 }
 
@@ -80,7 +81,7 @@ function chrome_install {
     if [ -z "`dpkg -l | grep chrome`" ]; then
         echo "Start to pulling Chrome package ..."
         if [ ! -f "./Software/google-chrome-stable_current_amd64.deb" ];then
-            wget -O $SoftDir/chrome-amd64.deb https://gitee.com/zhj0125/ubuntu-init/attach_files/895315/download/google-chrome-stable_current_amd64.deb
+            wget -O $SoftDir/chrome-amd64.deb https://gitee.com/zhj0125/ubuntu-init/attach_files/895589/download/google-chrome-stable_current_amd64.deb
         else
             cp ./Software/google-chrome-stable_current_amd64.deb $SoftDir/chrome-amd64.deb
         fi
@@ -102,16 +103,16 @@ function vscode_install {
         fi
         dpkg -i $SoftDir/vscode-amd64.deb
     fi
-    echo "VSCode has been installed."
+    echo -e "VSCode has been installed.\n"
 }
 
 # 10. Sougou_Pinyin
 function sougou_install {
     echo -e "\nStart to install Sougou Pinyin ..."
     if [ -z "`dpkg -l | grep sogoupinyin`" ]; then
-        apt-get -y install fcitx
-        apt-get install -f
-        apt-get -y --fix-broken install
+        sudo apt-get -y install fcitx
+        sudo apt-get install -f
+        sudo apt-get -y --fix-broken install
         echo "Start to pulling Sougou package ..."
         if [ ! -f "./Software/sogoupinyin_2.4.0.3469_amd64.deb" ];then
             wget -O $SoftDir/sougou-amd64.deb https://gitee.com/zhj0125/ubuntu-init/attach_files/895587/download/sogoupinyin_2.4.0.3469_amd64.deb
@@ -123,11 +124,12 @@ function sougou_install {
     echo "Sougou_Pinyin has been installed."
 }
 
+#---------------------------------------------
+# Start Run:
+# rootness   ->   NOT NEED ROOT
 
-
-rootness
-mkdir_conf
 apt_conf
+mkdir_conf
 wget_install
 source_list
 git_install
@@ -136,4 +138,5 @@ chrome_install
 vscode_install
 sougou_install
 
-
+echo -e "Task finish!\n\n"
+#---------------------------------------------
