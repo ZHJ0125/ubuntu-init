@@ -2,8 +2,9 @@
 
 #---------------------------------------------------------------
 # Function: Install initialization software for Ubuntu 18.04
-# Author: ZHJ0125
-# Version: [V0.1_2021-11-30]
+# Author : ZHJ0125
+# Version: V0.1_2021-11-30
+# Source : https://gitee.com/zhj0125/ubuntu-init
 #---------------------------------------------------------------
 
 #git_name="ZHJ0125"
@@ -46,6 +47,7 @@ function apt_conf {
     sudo apt-get clean
     sudo apt-get -y update
     sudo apt-get -y upgrade
+    sudo apt-get -y dist-upgrade
     echo -e "System update : OK\n"
 }
 
@@ -109,7 +111,7 @@ function chrome_install {
         else
             cp ./Software/google-chrome-stable_current_amd64.deb $SoftDir/chrome-amd64.deb
         fi
-        dpkg -i $SoftDir/chrome-amd64.deb
+        sudo dpkg -i $SoftDir/chrome-amd64.deb
     fi
     echo -e "Chrome has been installed.\n"
     # echo "export BROWSER=/usr/bin/google-chrome" >> /home/$user/.bashrc
@@ -128,7 +130,7 @@ function vscode_install {
         else
             cp ./Software/code_1.62.3-1637137107_amd64.deb $SoftDir/vscode-amd64.deb
         fi
-        dpkg -i $SoftDir/vscode-amd64.deb
+        sudo dpkg -i $SoftDir/vscode-amd64.deb
     fi
     # Add icon to Desktop
     sudo cp /usr/share/applications/code.desktop ~/Desktop/VSCode.desktop
@@ -149,7 +151,7 @@ function sougou_install {
         else
             cp ./Software/sogoupinyin_2.4.0.3469_amd64.deb $SoftDir/sougou-amd64.deb
         fi
-        dpkg -i $SoftDir/sougou-amd64.deb
+        sudo dpkg -i $SoftDir/sougou-amd64.deb
     fi
     echo "Sougou_Pinyin has been installed."
 }
