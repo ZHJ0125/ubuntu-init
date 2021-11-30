@@ -73,7 +73,7 @@ function wget_install {
 function source_list {
     echo -e "\nStart to change software source ..."
     sudo cp /etc/apt/sources.list /etc/apt/sources.list_backup
-    sudo wget -O /etc/apt/sources.list https://gitee.com/zhj0125/ubuntu-init/raw/master/.sources_list
+    sudo wget -O /etc/apt/sources.list https://gitee.com/zhj0125/ubuntu-init/raw/master/Config/.sources_list
     sudo apt-get -y update
     sudo apt-get -y autoremove
     echo -e "Software source : OK\n"
@@ -84,7 +84,7 @@ function git_install {
     echo -e "\nStart to install git ..."
     sudo apt-get -y install git
     # Download .gitconfig to user home
-    sudo wget -O /home/$USER/.gitconfig https://gitee.com/zhj0125/ubuntu-init/raw/master/.gitconfig
+    sudo wget -O /home/$USER/.gitconfig https://gitee.com/zhj0125/ubuntu-init/raw/master/Config/.gitconfig
     # echo "\[user\]" >> ~/.gitconfig
     # echo "name = $git_name" >> ~/.gitconfig
     # echo "email = $git_email" >> ~/.gitconfig
@@ -95,7 +95,7 @@ function git_install {
 function vim_install {
     echo -e "\nStart to install vim ..."
     sudo apt-get -y install vim
-    sudo wget -O /home/$USER/.vimrc https://gitee.com/zhj0125/ubuntu-init/raw/master/.vimrc
+    sudo wget -O /home/$USER/.vimrc https://gitee.com/zhj0125/ubuntu-init/raw/master/Config/.vimrc
     echo -e "VIM install : OK\n"
 }
 
