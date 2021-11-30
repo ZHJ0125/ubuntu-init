@@ -48,6 +48,7 @@ function apt_conf {
     sudo apt-get -y update
     sudo apt-get -y upgrade
     sudo apt-get -y dist-upgrade
+    sudo apt-get -y --fix-broken install
     echo -e "System update : OK\n"
 }
 
