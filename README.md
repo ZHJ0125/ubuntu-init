@@ -25,3 +25,7 @@
     * 方式一：复制 [main.sh](./main.sh) 文件内容，直接运行该脚本 `bash main.sh` （此方式需要下载安装包）
     * 方式二：克隆本项目，执行本项目中的 test.sh 文件（本项目中已包含所需软件的安装包）
 4. [可选项]：可以用命令 `sudo rm -r /home/$USER/Downloads/Software/` 以删除安装包目录
+
+## 创建ISO镜像
+
+可根据本项目创建个性化的 Ubuntu ISO 镜像，请看 [MAKE_ISO.md](./MAKE_ISO.md)
