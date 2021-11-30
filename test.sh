@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#dir=`pwd`
 #git_name="ZHJ0125"
 #git_email="shandonghoujin@163.com"
 user="zhj"

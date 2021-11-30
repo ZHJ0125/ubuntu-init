@@ -1,39 +1,27 @@
 # Ubuntu-Init
 
-#### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+## 介绍
 
-#### 软件架构
-软件架构说明
+> Ubuntu 常用软件安装脚本
 
+* 支持的软件版本：Ubuntu 18.04
 
-#### 安装教程
+## 脚本所作的配置项
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+* 安装 wget 和 curl 下载工具
+* 更换清华软件源
+* 安装并配置 Git
+* 安装并配置 VIM
+* 安装 Chrome
+* 安装 VSCode
+* 安装搜狗拼音输入法
 
-#### 使用说明
+## 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+1. 下载 [Ubuntu 18.04](https://mirrors4.tuna.tsinghua.edu.cn/ubuntu-releases/18.04.6/ubuntu-18.04.6-desktop-amd64.iso) 镜像
+2. 安装时，建议选择最小化安装
+3. 安装完成后
+    * 注意：请修改test.sh文件第5行的用户名 `user="zhj"`
+    * 方式一：复制 [test.sh](./test.sh) 文件内容，并使用 root 权限运行该脚本（此方式需要下载安装包）
+    * 方式二：克隆本项目，执行本项目中的 test.sh 文件（本项目中已包含所需软件的安装包）
+4. [可选项]：删除安装包目录，可以用命令 `sudo rm -r /home/$USER/Downloads/Software/`
