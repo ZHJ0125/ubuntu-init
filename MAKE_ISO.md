@@ -63,4 +63,6 @@ zhj@cubic:~$ nano main.sh
 zhj@cubic:~$ bash main.sh
 ```
 
+> Don't forget to remove installation package
+
 _End of file_
