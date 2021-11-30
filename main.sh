@@ -116,6 +116,7 @@ function chrome_install {
     echo -e "Chrome has been installed.\n"
     # echo "export BROWSER=/usr/bin/google-chrome" >> /home/$user/.bashrc
     # Add icon to Desktop
+    if [ ! -f ~/Desktop ]; then mkdir ~/Desktop; fi
     sudo cp /usr/share/applications/google-chrome.desktop ~/Desktop/Chrome.desktop
     sudo chown $USER ~/Desktop/Chrome.desktop && sudo chgrp $USER ~/Desktop/Chrome.desktop && sudo chmod +x ~/Desktop/Chrome.desktop
 }
@@ -133,6 +134,7 @@ function vscode_install {
         sudo dpkg -i $SoftDir/vscode-amd64.deb
     fi
     # Add icon to Desktop
+    if [ ! -f ~/Desktop ]; then mkdir ~/Desktop; fi
     sudo cp /usr/share/applications/code.desktop ~/Desktop/VSCode.desktop
     sudo chown $USER ~/Desktop/VSCode.desktop && sudo chgrp $USER ~/Desktop/VSCode.desktop && sudo chmod +x ~/Desktop/VSCode.desktop
     echo -e "VSCode has been installed.\n"
