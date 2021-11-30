@@ -21,7 +21,7 @@ function rootness {
 function mkdir_conf {
     echo -e "\nStart to build Software package directory ..."
     if [ ! -d "$SoftDir" ];then
-        mkdir $SoftDir
+        mkdir -p $SoftDir
         chown -R $user $SoftDir
         chgrp -R $user $SoftDir
     fi
@@ -94,7 +94,7 @@ function chrome_install {
 # 9. VSCode
 function vscode_install {
     echo -e "\nStart to install VSCode ..."
-    if [ -z "dpkg -l | grep 'Code editing'" ]; then
+    if [ -z "`dpkg -l | grep 'Code editing'`" ]; then
         echo "Start to pulling VSCode package ..."
         if [ ! -f "./Software/code_1.62.3-1637137107_amd64.deb" ];then
             wget -O $SoftDir/vscode-amd64.deb https://gitee.com/zhj0125/ubuntu-init/attach_files/895586/download/code_1.62.3-1637137107_amd64.deb
@@ -109,7 +109,7 @@ function vscode_install {
 # 10. Sougou_Pinyin
 function sougou_install {
     echo -e "\nStart to install Sougou Pinyin ..."
-    if [ -z "`dpkg -l | grep sougou`" ]; then
+    if [ -z "`dpkg -l | grep sogoupinyin`" ]; then
         apt-get -y install fcitx
         apt-get install -f
         apt-get -y --fix-broken install
@@ -127,12 +127,12 @@ function sougou_install {
 
 
 rootness
-#mkdir_conf
-#apt_conf
-#wget_install
-#source_list
-#git_install
-#vim_install
+mkdir_conf
+apt_conf
+wget_install
+source_list
+git_install
+vim_install
 chrome_install
 vscode_install
 sougou_install
