@@ -179,8 +179,8 @@ vim_install
 chrome_install
 vscode_install
 sougou_install
+apt_conf  # Update again for Sougou
 vlc_install
-apt_conf  # Update again
 
 echo -e "Task finish!\n"
 echo "You can run this command to remove installation package:"
