@@ -159,7 +159,7 @@ function sougou_install {
 
 # 11. VLC
 function vlc_install {
-    sudo apt-get install vlc
+    sudo apt-get -y install vlc
     # Add icon to Desktop
     sudo cp /usr/share/applications/vlc.desktop ~/Desktop/vlc.desktop
     sudo chown $USER ~/Desktop/vlc.desktop && sudo chgrp $USER ~/Desktop/vlc.desktop && sudo chmod +x ~/Desktop/vlc.desktop
