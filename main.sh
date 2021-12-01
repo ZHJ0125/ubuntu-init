@@ -2,9 +2,9 @@
 
 #---------------------------------------------------------------
 # Function: Install initialization software for Ubuntu 18.04
-# Author : ZHJ0125
-# Version: V0.1_2021-11-30
-# Source : https://gitee.com/zhj0125/ubuntu-init
+# Author  : ZHJ0125
+# Version : V0.1_2021-11-30
+# Source  : https://gitee.com/zhj0125/ubuntu-init
 #---------------------------------------------------------------
 
 #git_name="ZHJ0125"
@@ -20,10 +20,10 @@ function print_info {
     echo "    #   Used to install initialization software for Ubuntu 18.04   #"
     echo "    #   List of installed software:                                #"
     echo "    #   - apt sources.list -> Tsinghua Sources                     #"
-    echo "    #   - Install wget & curl                                      #"
+    echo "    #   - Install Tools -> wget & curl & net-tools & tree          #"
     echo "    #   - Install Git & VIM with my config file                    #"
     echo "    #   - Install Chrome & VSCode, put its icon on Desktop         #"
-    echo "    #   - Install SougouPinyin                                     #"
+    echo "    #   - Install SougouPinyin & VLC                               #"
     echo "    #   For more: https://gitee.com/zhj0125/ubuntu-init            #"
     echo "    #                                          ZHJ0125_2021.11.30  #"
     echo -e "    ################################################################\n\n"
@@ -55,21 +55,20 @@ function apt_conf {
 # 3. mkdir
 function mkdir_conf {
     echo -e "\nStart to build Software package directory ..."
-    if [ ! -d "$SoftDir" ];then
-        mkdir -p $SoftDir
-        # chown -R $user $SoftDir  -> for ROOT
-        # chgrp -R $user $SoftDir  -> for ROOT
-    fi
+    if [ ! -d "$SoftDir" ]; then mkdir -p $SoftDir; fi
+    if [ ! -f ~/Desktop ]; then mkdir ~/Desktop; fi
     echo "$SoftDir had been build."
     echo -e "Directory build : OK\n"
 }
 
-# 4. wget
-function wget_install {
+# 4. tools - wget & curl & net-tools & tree
+function tools_install {
     echo -e "\nStart to install wget and curl ..."
     sudo apt-get -y install wget
     sudo apt-get -y install curl
-    echo -e "wget & curl : OK\n"
+    sudo apt-get -y install net-tools
+    sudo apt-get -y install tree
+    echo -e "wget & curl & net-tools & tree: OK\n"
 }
 
 # 5. source_list
@@ -117,7 +116,6 @@ function chrome_install {
     echo -e "Chrome has been installed.\n"
     # echo "export BROWSER=/usr/bin/google-chrome" >> /home/$user/.bashrc
     # Add icon to Desktop
-    if [ ! -f ~/Desktop ]; then mkdir ~/Desktop; fi
     sudo cp /usr/share/applications/google-chrome.desktop ~/Desktop/Chrome.desktop
     sudo chown $USER ~/Desktop/Chrome.desktop && sudo chgrp $USER ~/Desktop/Chrome.desktop && sudo chmod +x ~/Desktop/Chrome.desktop
 }
@@ -135,7 +133,6 @@ function vscode_install {
         sudo dpkg -i $SoftDir/vscode-amd64.deb
     fi
     # Add icon to Desktop
-    if [ ! -f ~/Desktop ]; then mkdir ~/Desktop; fi
     sudo cp /usr/share/applications/code.desktop ~/Desktop/VSCode.desktop
     sudo chown $USER ~/Desktop/VSCode.desktop && sudo chgrp $USER ~/Desktop/VSCode.desktop && sudo chmod +x ~/Desktop/VSCode.desktop
     echo -e "VSCode has been installed.\n"
@@ -148,6 +145,7 @@ function sougou_install {
         sudo apt-get -y install fcitx
         sudo apt-get install -f
         sudo apt-get -y --fix-broken install
+        sudo apt-get -y install fcitx  # Try again, prevents uninstalled
         echo "Start to pulling Sougou package ..."
         if [ ! -f "./Software/sogoupinyin_2.4.0.3469_amd64.deb" ];then
             wget -O $SoftDir/sougou-amd64.deb https://gitee.com/zhj0125/ubuntu-init/attach_files/895587/download/sogoupinyin_2.4.0.3469_amd64.deb
@@ -159,6 +157,14 @@ function sougou_install {
     echo "Sougou_Pinyin has been installed."
 }
 
+# 11. VLC
+function vlc_install {
+    sudo apt-get install vlc
+    # Add icon to Desktop
+    sudo cp /usr/share/applications/vlc.desktop ~/Desktop/vlc.desktop
+    sudo chown $USER ~/Desktop/vlc.desktop && sudo chgrp $USER ~/Desktop/vlc.desktop && sudo chmod +x ~/Desktop/vlc.desktop
+}
+
 #---------------------------------------------
 # Start Run:
 # rootness -> Deprecated
@@ -166,13 +172,14 @@ function sougou_install {
 print_info
 apt_conf
 mkdir_conf
-wget_install
+tools_install
 source_list
 git_install
 vim_install
 chrome_install
 vscode_install
 sougou_install
+vlc_install
 apt_conf  # Update again
 
 echo -e "Task finish!\n"

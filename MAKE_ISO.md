@@ -13,56 +13,61 @@ zhj@thinkpad-vmware:~$ sudo apt-get install cubic
 
 > then, open Cubic
 
-[IN Cubic]: When You have entered the virtual environment.
+[IN Cubic]: When You have entered the Cubic virtual environment.
 
-## 1. Add user - zhj (or others you want)
+## 1. Add sudoer user - zhj (or others you want)
 
 ```sh
-root@cubic:~# sudo adduser zhj
-Adding user `zhj' ...
-Adding new group `zhj' (1000) ...
-Adding new user `zhj' (1000) with group `zhj' ...
-Creating home directory `/home/zhj' ...
-Copying files from `/etc/skel' ...
-Enter new UNIX password:
-Retype new UNIX password:
+You have entered the virtual environment.
+root@cubic:~# useradd -s /bin/bash -mr zhj
+root@cubic:~# usermod -aG sudo zhj
+root@cubic:~# groups zhj
+zhj : zhj sudo
+root@cubic:~# passwd zhj
+Enter new UNIX password: 
+Retype new UNIX password: 
 passwd: password updated successfully
-Changing the user information for zhj
-Enter the new value, or press ENTER for the default
-	Full Name []: ZHJ0125
-	Room Number []:
-	Work Phone []:
-	Home Phone []:
-	Other []:
-Is the information correct? [Y/n]
 ```
 
-## 2. Add sudoer to zhj
-
-```sh
-root@cubic:~# sudo nano /etc/sudoers
-
-[IN /etc/sudoers]
-# User privilege specification
-root    ALL=(ALL:ALL) ALL
-zhj     ALL=(ALL:ALL) ALL     <-----  add
-```
-## 3. change user to zhj
+## 2. change user to zhj & edit script
 
 ```sh
 root@cubic:~# su zhj
-zhj@cubic:/root$ cd
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+zhj@cubic:/root$ cd 
 zhj@cubic:~$ nano main.sh
 ```
 
-## 4. Copy [source code](./main.sh) to local main.sh file
+## 3. Copy [source code](./main.sh) to local main.sh file
 
-## 5. Run main.sh
+## 4. Run main.sh
 
 ```sh
 zhj@cubic:~$ bash main.sh
 ```
 
 > Don't forget to remove installation package
+
+## TODO
+
+* IN new ISO, Language Support -> Apply System-Wide, why show `Administrator` instead of $USER or root:
+```sh
+[IN new ISO]
+Authentication Required
+system policy prevented setting default language
+Administrator
+
+[IN Cubic]
+zhj@cubic:~$ sudo passwd Administrator
+[sudo] password for zhj: 
+passwd: user 'Administrator' does not exist
+```
+
+## Reference
+
+* 如何在Ubuntu中使用户成为管理员 - [https://ubuntuqa.com/article/10086.html](https://ubuntuqa.com/article/10086.html)
+* 新手教程：Ubuntu 下如何修改用户密码 - [https://linux.cn/article-10580-1.html](https://linux.cn/article-10580-1.html)
+* ubuntu 添加管理员账号 - [https://blog.csdn.net/codebistu/article/details/8200908](https://blog.csdn.net/codebistu/article/details/8200908)
 
 _End of file_
