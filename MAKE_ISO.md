@@ -1,4 +1,6 @@
-# HOW TO SETUP ISO
+# HOW TO SETUP CUSTOM ISO
+
+> My own custom ISO: [Ubuntu-18.04.6-desktop-amd64-LTS-ZHJ0125_V0.1_build05](https://www.aliyundrive.com/s/DPaMJNS4aTt)  ( Remove the `.txt` suffix )
 
 ## 0. Install Cubic
 
@@ -17,16 +19,28 @@ zhj@thinkpad-vmware:~$ sudo apt-get install cubic
 
 ## 1. Add sudoer user - zhj (or others you want)
 
-```sh
+```bash
 You have entered the virtual environment.
-root@cubic:~# useradd -s /bin/bash -mr zhj
-root@cubic:~# usermod -aG sudo zhj
-root@cubic:~# groups zhj
-zhj : zhj sudo
-root@cubic:~# passwd zhj
+root@cubic:~# sudo adduser zhj
+Adding user `zhj' ...
+Adding new group `zhj' (1000) ...
+Adding new user `zhj' (1000) with group `zhj' ...
+Creating home directory `/home/zhj' ...
+Copying files from `/etc/skel' ...
 Enter new UNIX password: 
 Retype new UNIX password: 
 passwd: password updated successfully
+Changing the user information for zhj
+Enter the new value, or press ENTER for the default
+	Full Name []: ZHJ0125
+	Room Number []: 
+	Work Phone []: 
+	Home Phone []: 
+	Other []: 
+Is the information correct? [Y/n]
+root@cubic:~# usermod -aG sudo zhj
+root@cubic:~# groups zhj
+zhj : zhj sudo
 ```
 
 ## 2. change user to zhj & edit script
@@ -49,20 +63,12 @@ zhj@cubic:~$ bash main.sh
 
 > Don't forget to remove installation package
 
-## TODO
+## 5. Chooes kernel
 
-* IN new ISO, Language Support -> Apply System-Wide, why show `Administrator` instead of $USER or root:
-```sh
-[IN new ISO]
-Authentication Required
-system policy prevented setting default language
-Administrator
+! Must choose a lower version kernel, otherwise it will not be able to boot !
 
-[IN Cubic]
-zhj@cubic:~$ sudo passwd Administrator
-[sudo] password for zhj: 
-passwd: user 'Administrator' does not exist
-```
+* [ √ ] Kernel version 5.4.0-84
+* [ X ] Kernel version 5.4.0-91
 
 ## Reference
 

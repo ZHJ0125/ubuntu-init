@@ -7,8 +7,6 @@
 # Source  : https://gitee.com/zhj0125/ubuntu-init
 #---------------------------------------------------------------
 
-#git_name="ZHJ0125"
-#git_email="shandonghoujin@163.com"
 SoftDir="/home/$USER/Downloads/Software"
 
 # 0. Info
@@ -46,9 +44,9 @@ function apt_conf {
     echo -e "\nStart to update software source ..."
     sudo apt-get clean
     sudo apt-get -y update
+    # Please comment out upgrade when making custom ISO image
     sudo apt-get -y upgrade
     sudo apt-get -y dist-upgrade
-    sudo apt-get -y --fix-broken install
     echo -e "System update : OK\n"
 }
 
@@ -87,9 +85,6 @@ function git_install {
     sudo apt-get -y install git
     # Download .gitconfig to user home
     sudo wget -O /home/$USER/.gitconfig https://gitee.com/zhj0125/ubuntu-init/raw/master/Config/.gitconfig
-    # echo "\[user\]" >> ~/.gitconfig
-    # echo "name = $git_name" >> ~/.gitconfig
-    # echo "email = $git_email" >> ~/.gitconfig
     echo -e "Git install : OK\n"
 }
 
@@ -114,7 +109,6 @@ function chrome_install {
         sudo dpkg -i $SoftDir/chrome-amd64.deb
     fi
     echo -e "Chrome has been installed.\n"
-    # echo "export BROWSER=/usr/bin/google-chrome" >> /home/$user/.bashrc
     # Add icon to Desktop
     sudo cp /usr/share/applications/google-chrome.desktop ~/Desktop/Chrome.desktop
     sudo chown $USER ~/Desktop/Chrome.desktop && sudo chgrp $USER ~/Desktop/Chrome.desktop && sudo chmod +x ~/Desktop/Chrome.desktop
@@ -154,6 +148,7 @@ function sougou_install {
         fi
         sudo dpkg -i $SoftDir/sougou-amd64.deb
     fi
+    sudo apt-get -y --fix-broken install
     echo "Sougou_Pinyin has been installed."
 }
 
@@ -179,8 +174,8 @@ vim_install
 chrome_install
 vscode_install
 sougou_install
-apt_conf  # Update again for Sougou
 vlc_install
+apt_conf  # Update again
 
 echo -e "Task finish!\n"
 echo "You can run this command to remove installation package:"
