@@ -28,7 +28,7 @@
 
 可根据本项目创建个性化的 Ubuntu ISO 镜像，请看 [MAKE_ISO.md](./MAKE_ISO.md)
 
-我制作的自定义镜像：
-* 版本号: V0.1_build05
-* 下载链接: [Ubuntu-18.04.6-desktop-amd64-LTS-ZHJ0125_V0.1_build05](https://www.aliyundrive.com/s/DPaMJNS4aTt)  ( 需要去掉`.txt`后缀 )
-* 说明：用户名为 `zhj`
+自定义镜像信息：
+* 版本说明: V0.1_build06
+* 下载链接: [Ubuntu-18.04.6-desktop-amd64-LTS-ZHJ0125_V0.1_build06](https://www.aliyundrive.com/s/9bu1JH4oNCw)  ( 需要去掉`.txt`后缀 )
+* 用户说明：用户名为 `zhj` 密码为 `12345`

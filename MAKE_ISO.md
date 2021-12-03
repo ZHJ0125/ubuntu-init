@@ -1,6 +1,6 @@
 # HOW TO SETUP CUSTOM ISO
 
-> My own custom ISO: [Ubuntu-18.04.6-desktop-amd64-LTS-ZHJ0125_V0.1_build05](https://www.aliyundrive.com/s/DPaMJNS4aTt)  ( Remove the `.txt` suffix )
+> My own custom ISO: [Ubuntu-18.04.6-desktop-amd64-LTS-ZHJ0125_V0.1_build06](https://www.aliyundrive.com/s/9bu1JH4oNCw)  ( Remove the `.txt` suffix )
 
 ## 0. Install Cubic
 
