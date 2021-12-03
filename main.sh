@@ -25,7 +25,7 @@ function print_info {
     echo "    #   For more: https://gitee.com/zhj0125/ubuntu-init            #"
     echo "    #                                          ZHJ0125_2021.11.30  #"
     echo -e "    ################################################################\n\n"
-    read -s -n1 -p $'Press any key to continue ...\n\n'
+    read -s -n1 -p $'Press any key to continue or CTRL+C to stop ...\n\n'
 }
 
 # 1. root (Deprecated)
