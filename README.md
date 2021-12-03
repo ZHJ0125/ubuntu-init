@@ -20,7 +20,7 @@
 2. 安装时，建议选择**最小化安装**
 3. 安装完成后
     * 注意：请在普通用户状态下执行以下脚本，不要切换至root用户
-    * 方式一：复制 [main.sh](./main.sh) 文件内容，直接运行该脚本 `bash main.sh` （此方式需要下载安装包）
+    * 方式一：直接执行 `wget https://gitee.com/zhj0125/ubuntu-init/raw/master/main.sh && bash main.sh`
     * 方式二：克隆本项目，执行本项目中的 main.sh 文件（本项目中已包含所需软件的安装包）
 4. [ 可选项 ]：可以用命令 `sudo rm -r /home/$USER/Downloads/Software/` 删除安装包目录
 
