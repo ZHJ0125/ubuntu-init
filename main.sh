@@ -165,10 +165,10 @@ function vlc_install {
 # rootness -> Deprecated
 
 print_info
+source_list
 apt_conf
 mkdir_conf
 tools_install
-source_list
 git_install
 vim_install
 chrome_install
