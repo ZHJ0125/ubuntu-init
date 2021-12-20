@@ -1,0 +1,15 @@
+[/]
+list=['b1dcc9dd-5262-4d8d-a863-c897e6d979b9']
+
+[:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+visible-name='zhj'
+login-shell=false
+default-size-columns=120
+default-size-rows=40
+use-system-font=false
+use-transparent-background=true
+use-theme-colors=false
+font='Cascadia Code 12'
+use-theme-transparency=false
+background-transparency-percent=3
+scrollback-lines=100000
