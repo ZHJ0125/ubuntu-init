@@ -3,7 +3,7 @@
 #---------------------------------------------------------------
 # Function: Install initialization software for Ubuntu 18.04
 # Author  : ZHJ0125
-# Version : V0.1_2021-11-30
+# Version : V0.2.0_2021-12-20
 # Source  : https://gitee.com/zhj0125/ubuntu-init
 #---------------------------------------------------------------
 
@@ -13,7 +13,7 @@ SoftDir="/home/$USER/Downloads/Software"
 function print_info {
     echo -e "\n\n    ################################################################"
     echo "    #                                                              #"
-    echo "    #              WELCOME TO RUN THIS SHELL SCRIPT                #"
+    echo "    #            WELCOME TO Ubuntu-init SHELL SCRIPT               #"
     echo "    # ------------------------------------------------------------ #"
     echo "    #   Used to install initialization software for Ubuntu 18.04   #"
     echo "    #   List of installed software:                                #"
@@ -21,9 +21,10 @@ function print_info {
     echo "    #   - Install Tools -> wget & curl & net-tools & tree          #"
     echo "    #   - Install Git & VIM with my config file                    #"
     echo "    #   - Install Chrome & VSCode, put its icon on Desktop         #"
+    echo "    #   - Install CascadiaCode font, preference gnome-terminal     #"
     echo "    #   - Install SougouPinyin & VLC                               #"
     echo "    #   For more: https://gitee.com/zhj0125/ubuntu-init            #"
-    echo "    #                                          ZHJ0125_2021.11.30  #"
+    echo "    #                                          ZHJ0125_2021.12.20  #"
     echo -e "    ################################################################\n\n"
     read -s -n1 -p $'Press any key to continue or CTRL+C to stop ...\n\n'
 }
@@ -160,6 +161,28 @@ function vlc_install {
     sudo chown $USER ~/Desktop/vlc.desktop && sudo chgrp $USER ~/Desktop/vlc.desktop && sudo chmod +x ~/Desktop/vlc.desktop
 }
 
+# 12. Gnome-Terminal Preferences
+function gnome-terminal {
+    echo -e "\nStart to preference gnome terminal ..."
+    if [ -z "`dpkg -l | grep De-archiver`" ]; then
+        sudo apt-get install unzip
+    fi
+    # install font:CascadiaCode
+    if [ ! -f "./Software/CascadiaCode-2111.01.zip" ];then
+        wget -O $SoftDir/CascadiaCode.zip https://gitee.com/zhj0125/ubuntu-init/attach_files/919280/download/CascadiaCode-2111.01.zip
+    else
+        cp ./Software/CascadiaCode-2111.01.zip $SoftDir/CascadiaCode.zip
+    fi
+    unzip $SoftDir/CascadiaCode.zip -d $SoftDir/CascadiaCode
+    mkdir -p /home/$USER/.fonts
+    sudo cp $SoftDir/CascadiaCode/ttf/CascadiaCode.ttf /home/$USER/.fonts
+    sudo fc-cache -fv
+    # preference gnome terminal
+    wget -O $SoftDir/gnome-terminal-profiles.dconf https://gitee.com/zhj0125/ubuntu-init/raw/master/Config/.gnome-terminal-profiles.dconf
+    dconf load /org/gnome/terminal/legacy/profiles:/ < $SoftDir/gnome-terminal-profiles.dconf
+}
+
+
 #---------------------------------------------
 # Start Run:
 # rootness -> Deprecated
@@ -175,6 +198,7 @@ chrome_install
 vscode_install
 sougou_install
 vlc_install
+gnome-terminal
 apt_conf  # Update again
 
 echo -e "Task finish!\n"
@@ -182,3 +206,4 @@ echo "You can run this command to remove installation package:"
 echo "     sudo rm -r /home/$USER/Downloads/Software/"
 echo -e "\nBye!\n\n"
 #---------------------------------------------
+
